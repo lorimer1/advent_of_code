@@ -1,0 +1,31 @@
+https://realpython.com/python-advent-of-code/
+
+pip install advent-of-code-data
+pip install advent-of-code-ocr
+pip install pytest
+pip install parse
+pip install numpy
+pip install colorama
+pip install rich
+
+
+https://pypi.org/project/advent-of-code-data/
+
+aocd > input.txt  # saves today's data
+aocd 13 2018 > day13.txt  # save some other day's data
+
+aocd 2022 5 --example
+
+from aocd import submit
+submit(my_answer, part="a", day=25, year=2017)
+
+from aocd import submit
+submit(my_answer)
+
+
+from aocd.models import Puzzle
+puzzle = Puzzle(year=2017, day=20)
+puzzle.input_data
+puzzle.answer_a = 299
+
+
