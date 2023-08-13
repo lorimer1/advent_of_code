@@ -25,18 +25,17 @@ def parse(puzzle_input):
     return puzzle_input
 
 
-def part1(data: str):
-    pass
+def part1(puzzle_input: str):
+    data = parse(puzzle_input)  # pre-process input
 
 
-def part2(data: str):
-    pass
+def part2(puzzle_input: str):
+    data = parse(puzzle_input)  # pre-process input
 
 
 def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
-    data = parse(puzzle.input_data)  # pre-process input
-    solution1 = part1(data)
-    solution2 = part2(data)
+    solution1 = part1(puzzle.input_data)
+    solution2 = part2(puzzle.input_data)
 
     print(solution1)
     print(solution2)
@@ -49,5 +48,6 @@ def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
 
 if __name__ == "__main__":
     puzzle: Puzzle = Puzzle(year=2015, day=2)  # I Was Told There Would Be No Math
-    print_example_test_data(puzzle)
+    # print_example_test_data(puzzle)
+    # print(puzzle.input_data)
     solve(puzzle, submit_a=False, submit_b=False)
