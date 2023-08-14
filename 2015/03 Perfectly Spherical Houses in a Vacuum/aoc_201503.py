@@ -1,4 +1,5 @@
 from aocd.models import Puzzle
+from collections import Counter
 
 
 def print_example_test_data(puzzle: Puzzle):
@@ -21,24 +22,50 @@ def print_example_test_data(puzzle: Puzzle):
     )
 
 
-def parse(puzzle_input: str) -> list[list[int]]:
-    return [
-        [int(side) for side in line.split("x")] for line in puzzle_input.split("\n")
-    ]
+def parse(puzzle_input):
+    return puzzle_input
 
 
-def part1(puzzle_input: str) -> int:
+def part1(puzzle_input: str):
     data = parse(puzzle_input)  # pre-process input
-    return sum(
-        (3 * l * w) + (2 * w * h) + (2 * h * l)
-        for box in data
-        for l, w, h in [sorted(box)]
-    )
+
+    dirs = {"^": (0, 1), "v": (0, -1), ">": (1, 0), "<": (-1, 0)}
+
+    x, y = 0, 0
+    locations: set = set()
+    locations.add((x, y))
+
+    for dir in puzzle_input:
+        dx, dy = dirs[dir][0], dirs[dir][1]
+        x += dx
+        y += dy
+        locations.add((x, y))
+
+    return len(locations)
 
 
 def part2(puzzle_input: str):
     data = parse(puzzle_input)  # pre-process input
-    return sum((2 * (l + w)) + (l * w * h) for box in data for l, w, h in [sorted(box)])
+
+    dirs = {"^": (0, 1), "v": (0, -1), ">": (1, 0), "<": (-1, 0)}
+
+    x, y = 0, 0
+    locations = set()
+    locations.add((x, y))
+
+    workers = {"santa": [x, y], "robo": [x, y]}
+    worker = "santa"
+
+    x_idx, y_idx = 0, 1
+
+    for dir in puzzle_input:
+        dx, dy = dirs[dir][0], dirs[dir][1]
+        workers[worker][x_idx] += dx
+        workers[worker][y_idx] += dy
+        locations.add((workers[worker][x_idx], workers[worker][y_idx]))
+        worker = "robo" if worker == "santa" else "santa"
+
+    return len(locations)
 
 
 def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
@@ -55,7 +82,6 @@ def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
 
 
 if __name__ == "__main__":
-    puzzle: Puzzle = Puzzle(year=2015, day=2)  # I Was Told There Would Be No Math
-    # print_example_test_data(puzzle)
-    # print(puzzle.input_data)
+    puzzle: Puzzle = Puzzle(year=2015, day=3)
+    print_example_test_data(puzzle)
     solve(puzzle, submit_a=True, submit_b=True)
