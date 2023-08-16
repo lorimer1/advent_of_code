@@ -34,27 +34,32 @@ def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
         puzzle.answer_b = solution2
 
 
-from itertools import starmap
+from hashlib import md5
+from itertools import count
 
 
-def parse(puzzle_input: str) -> list[list[int]]:
-    return [sorted(map(int, line.split("x"))) for line in puzzle_input.splitlines()]
+def parse(puzzle_input: str) -> str:
+    return puzzle_input
+
+
+def do_solve(input: str, target: str, start: int = 1) -> int:
+    for i in count(start):
+        m = md5(f"{input}{i}".encode()).hexdigest()
+        if m.startswith(target):
+            return i
 
 
 def part1(puzzle_input: str) -> int:
     data = parse(puzzle_input)  # pre-process input
-    paper = lambda a, b, c: 3 * a * b + 2 * b * c + 2 * c * a
-    return sum(starmap(paper, data))
+    return do_solve(puzzle_input, 5 * "0")
 
 
-def part2(puzzle_input: str):
+def part2(puzzle_input: str) -> int:
     data = parse(puzzle_input)  # pre-process input
-    ribbon = lambda a, b, c: 2 * a + 2 * b + a * b * c
-    return sum(starmap(ribbon, data))
+    return do_solve(puzzle_input, 6 * "0")
 
 
 if __name__ == "__main__":
-    puzzle: Puzzle = Puzzle(year=2015, day=2)  # I Was Told There Would Be No Math
+    puzzle: Puzzle = Puzzle(year=2015, day=4)  #
     # print_example_test_data(puzzle)
-    # print(puzzle.input_data)
     solve(puzzle, submit_a=True, submit_b=True)

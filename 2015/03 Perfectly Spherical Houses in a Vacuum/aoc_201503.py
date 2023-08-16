@@ -1,5 +1,4 @@
 from aocd.models import Puzzle
-from collections import Counter
 
 
 def print_example_test_data(puzzle: Puzzle):
@@ -22,52 +21,6 @@ def print_example_test_data(puzzle: Puzzle):
     )
 
 
-def parse(puzzle_input):
-    return puzzle_input
-
-
-def part1(puzzle_input: str):
-    data = parse(puzzle_input)  # pre-process input
-
-    dirs = {"^": (0, 1), "v": (0, -1), ">": (1, 0), "<": (-1, 0)}
-
-    x, y = 0, 0
-    locations: set = set()
-    locations.add((x, y))
-
-    for dir in puzzle_input:
-        dx, dy = dirs[dir][0], dirs[dir][1]
-        x += dx
-        y += dy
-        locations.add((x, y))
-
-    return len(locations)
-
-
-def part2(puzzle_input: str):
-    data = parse(puzzle_input)  # pre-process input
-
-    dirs = {"^": (0, 1), "v": (0, -1), ">": (1, 0), "<": (-1, 0)}
-
-    x, y = 0, 0
-    locations = set()
-    locations.add((x, y))
-
-    workers = {"santa": [x, y], "robo": [x, y]}
-    worker = "santa"
-
-    x_idx, y_idx = 0, 1
-
-    for dir in puzzle_input:
-        dx, dy = dirs[dir][0], dirs[dir][1]
-        workers[worker][x_idx] += dx
-        workers[worker][y_idx] += dy
-        locations.add((workers[worker][x_idx], workers[worker][y_idx]))
-        worker = "robo" if worker == "santa" else "santa"
-
-    return len(locations)
-
-
 def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
     solution1 = part1(puzzle.input_data)
     solution2 = part2(puzzle.input_data)
@@ -79,6 +32,30 @@ def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
         puzzle.answer_a = solution1
     if submit_b and not puzzle.answered_b:
         puzzle.answer_b = solution2
+
+
+def parse(puzzle_input):
+    return puzzle_input
+
+
+def get_answer(data, players=1):
+    directions = {"^": -1j, "v": +1j, "<": -1, ">": 1}
+    locations = [0] * players
+    visited = {0}
+    for i, d in enumerate(data):
+        locations[i % players] += directions[d]
+        visited |= {locations[i % players]}
+    return len(visited)
+
+
+def part1(puzzle_input: str):
+    data = parse(puzzle_input)  # pre-process input
+    return get_answer(data)
+
+
+def part2(puzzle_input: str):
+    data = parse(puzzle_input)  # pre-process input
+    return get_answer(data, 2)
 
 
 if __name__ == "__main__":

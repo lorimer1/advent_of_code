@@ -21,18 +21,6 @@ def print_example_test_data(puzzle: Puzzle):
     )
 
 
-def parse(puzzle_input):
-    return puzzle_input
-
-
-def part1(puzzle_input: str):
-    data = parse(puzzle_input)  # pre-process input
-
-
-def part2(puzzle_input: str):
-    data = parse(puzzle_input)  # pre-process input
-
-
 def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
     solution1 = part1(puzzle.input_data)
     solution2 = part2(puzzle.input_data)
@@ -44,6 +32,18 @@ def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
         puzzle.answer_a = solution1
     if submit_b and not puzzle.answered_b:
         puzzle.answer_b = solution2
+
+
+def parse(puzzle_input):
+    return puzzle_input
+
+
+def part1(puzzle_input: str):
+    data = parse(puzzle_input)  # pre-process input
+
+
+def part2(puzzle_input: str):
+    data = parse(puzzle_input)  # pre-process input
 
 
 if __name__ == "__main__":

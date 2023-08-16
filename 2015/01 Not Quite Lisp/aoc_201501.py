@@ -21,27 +21,6 @@ def print_example_test_data(puzzle: Puzzle):
     )
 
 
-def parse(puzzle_input):
-    return puzzle_input
-
-
-def part1(puzzle_input: str):
-    data = parse(puzzle_input)  # pre-process input
-    return data.count("(") - data.count(")")
-
-
-def part2(puzzle_input: str):
-    data = parse(puzzle_input)  # pre-process input
-    acc = 0
-    for pos, char in enumerate(data):
-        if char == "(":
-            acc += 1
-        else:
-            acc -= 1
-        if acc == -1:
-            return pos + 1
-
-
 def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
     solution1 = part1(puzzle.input_data)
     solution2 = part2(puzzle.input_data)
@@ -53,6 +32,25 @@ def solve(puzzle: Puzzle, submit_a=False, submit_b=False):
         puzzle.answer_a = solution1
     if submit_b and not puzzle.answered_b:
         puzzle.answer_b = solution2
+
+
+from itertools import accumulate
+
+
+def parse(puzzle_input):
+    return puzzle_input
+
+
+def part1(puzzle_input: str):
+    data = parse(puzzle_input)  # pre-process input
+    return data.count("(") - data.count(")")
+
+
+def part2(puzzle_input: str):
+    data = parse(puzzle_input)  # pre-process input
+    travel = lambda acc, c: acc + (1 if c == "(" else -1)
+    floors_visited = list(accumulate(data, travel, initial=0))
+    return next(i for i, floor in enumerate(floors_visited) if floor < 0)
 
 
 if __name__ == "__main__":
