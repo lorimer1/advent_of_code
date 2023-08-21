@@ -34,3 +34,10 @@
     all(f not in s for f in ("ab", "cd", "pq", "xy"))
 ```
 
+## 06 Probably a Fire Hazard
+```python
+    Statement = namedtuple("Statement", ["action", "start_x", "start_y", "end_x", "end_y"])
+    start_x, start_y = map(int, parts[2].split(","))
+    statement_obj = Statement(action, start_x, start_y, end_x, end_y)
+```
+
