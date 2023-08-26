@@ -41,3 +41,27 @@
     statement_obj = Statement(action, start_x, start_y, end_x, end_y)
 ```
 
+## 07 Some Assembly Required
+```python
+    from functools import lru_cache
+    from operator import and_, or_, lshift, rshift
+    gates = {"AND": and_, "OR": or_, "LSHIFT": lshift, "RSHIFT": rshift}
+    @lru_cache
+    def get_wire_value(wire):
+        try:
+            return int(wire)
+        except ValueError:
+            gate_config = wires[wire]
+            if len(gate_config) == 1:
+                return get_wire_value(gate_config[0])
+            elif len(gate_config) == 2:
+                return ~get_wire_value(gate_config[1]) & 0xFFFF
+            else:
+                gate = gates[gate_config[1]]
+                return gate(
+                    get_wire_value(gate_config[0]), get_wire_value(gate_config[2])
+                )
+
+    return get_wire_value(wire)        
+```
+

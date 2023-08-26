@@ -43,19 +43,11 @@ def parse(puzzle_input: list[str]) -> list[namedtuple]:
 
     for statement in puzzle_input.split("\n"):
         parts = statement.split(" ")
-
-        if parts[0] == "turn":
-            action = parts[1]
-            start_x, start_y = map(int, parts[2].split(","))
-            end_x, end_y = map(int, parts[4].split(","))
-            statement_obj = Statement(action, start_x, start_y, end_x, end_y)
-            result.append(statement_obj)
-        else:
-            action = parts[0]
-            start_x, start_y = map(int, parts[1].split(","))
-            end_x, end_y = map(int, parts[3].split(","))
-            statement_obj = Statement(action, start_x, start_y, end_x, end_y)
-            result.append(statement_obj)
+        action = parts[-4]
+        start_x, start_y = map(int, parts[-3].split(","))
+        end_x, end_y = map(int, parts[-1].split(","))
+        statement_obj = Statement(action, start_x, start_y, end_x, end_y)
+        result.append(statement_obj)
 
     return result
 

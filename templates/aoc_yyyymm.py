@@ -39,14 +39,14 @@ def parse(puzzle_input):
 
 
 def part1(puzzle_input: str):
-    data = parse(puzzle_input)  # pre-process input
+    data = parse(puzzle_input)
 
 
 def part2(puzzle_input: str):
-    data = parse(puzzle_input)  # pre-process input
+    data = parse(puzzle_input)
 
 
 if __name__ == "__main__":
-    puzzle: Puzzle = Puzzle(year=0, day=0)  #
+    puzzle: Puzzle = Puzzle(year=0, day=0)
     print_example_test_data(puzzle)
     solve(puzzle, submit_a=False, submit_b=False)
