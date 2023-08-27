@@ -65,3 +65,42 @@
     return get_wire_value(wire)        
 ```
 
+## 08 Matchsticks
+```python
+    return sum(len(line) - len(eval(line)) for line in data)
+    return sum(line.count(r'"') + line.count("\\") + 2 for line in data)
+```
+
+## 09 All in a Single Night
+```python
+    from itertools import permutations
+
+    def parse_line(line):
+        a, _, b, _, dist = line.split()
+        return a, b, int(dist)
+
+    def parse(puzzle_input: str) -> list:
+        data = [parse_line(line) for line in puzzle_input.splitlines()]
+        return data
+
+    def create_relations(data):
+        locations = set()
+        relations = dict()
+        for a, b, dist in data:
+            locations |= {a, b}
+            relations[(a, b)] = dist
+            relations[(b, a)] = dist
+        return locations, relations
+
+    def solve(puzzle_input: str, func):
+        data = parse(puzzle_input)
+        locations, relations = create_relations(data)
+        totals = []
+        for route in permutations(locations):
+            this_total = 0
+            for trip in zip(route, route[1:]):
+                this_total += relations[trip]
+            totals.append(this_total)
+
+        return func(totals)
+```
