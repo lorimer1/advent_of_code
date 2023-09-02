@@ -24,20 +24,16 @@ def parse(puzzle_input: str) -> list[str]:
 
 
 def distance(deer: Deer, sec: int) -> int:
-    cycle_sec = deer.on_time + deer.off_time
-    cycles, remaining_sec = sec // cycle_sec, sec % cycle_sec
-    last_on_time = min(deer.on_time, remaining_sec)
-    return deer.speed * ((cycles * deer.on_time) + last_on_time)
+    cycles, remaining_sec = divmod(sec, deer.on_time + deer.off_time)
+    return deer.speed * ((cycles * deer.on_time) + min(deer.on_time, remaining_sec))
 
 
 def solve(puzzle_input: str, time: int, is_b=False):
     racers, data = parse(puzzle_input)
     if not is_b:
-        return max([distance(deer, time) for deer in data])
+        return max((distance(deer, time) for deer in data))
     for sec in range(1, time + 1):
-        deer_distances = dict()
-        for deer in data:
-            deer_distances[deer.name] = distance(deer, sec)
+        deer_distances = {deer.name: distance(deer, sec) for deer in data}
         max_distance = max(deer_distances.values())
         for name, dist in deer_distances.items():
             if dist == max_distance:

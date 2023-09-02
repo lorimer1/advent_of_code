@@ -147,3 +147,9 @@
             clockwise[0]
         )  # last person is sitting next to first (circular table)   
 ```
+
+## Reindeer Olympics
+```python
+    cycles, remaining_sec = divmod(sec, deer.on_time + deer.off_time)
+    deer_distances = {deer.name: distance(deer, sec) for deer in data}
+```
