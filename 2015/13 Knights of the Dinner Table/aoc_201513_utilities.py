@@ -1,7 +1,7 @@
 from aocd.models import Puzzle
 
 AOC_YEAR = 2015
-AOC_DAY = 8
+AOC_DAY = 13
 
 PUZZLE = Puzzle(year=AOC_YEAR, day=AOC_DAY)
 

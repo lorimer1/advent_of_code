@@ -138,3 +138,12 @@
         else:
             return 0    
 ```
+
+## 13 Knights of the Dinner Table
+```python
+    for this_perm in itertools.permutations(persons):
+        clockwise = list(this_perm)
+        clockwise.append(
+            clockwise[0]
+        )  # last person is sitting next to first (circular table)   
+```

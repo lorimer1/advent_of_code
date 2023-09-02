@@ -1,9 +1,9 @@
 from aocd.models import Puzzle
 
 AOC_YEAR = 2015
-AOC_MONTH = 9
+AOC_DAY = 9
 
-PUZZLE = Puzzle(year=AOC_YEAR, day=AOC_MONTH)
+PUZZLE = Puzzle(year=AOC_YEAR, day=AOC_DAY)
 
 
 def print_example_test_data(puzzle: Puzzle):
