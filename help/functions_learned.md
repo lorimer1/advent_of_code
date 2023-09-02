@@ -117,3 +117,24 @@
     )
     has_increasing_straight(list(map(ord, password)))
 ```
+
+## 12 JSAbacusFramework.io
+```python
+    numbers = re.compile("-?\d+")
+    data = list(map(int, re.findall(numbers, puzzle_input)))
+    jason = json.loads(puzzle_input)
+    def find_sum(jason: list) -> int:
+        if type(jason) is int:
+            return jason
+
+        if type(jason) is dict:
+            if "red" in jason.values():
+                return 0
+            else:
+                return sum(map(find_sum, jason.values()))
+
+        if type(jason) is list:
+            return sum(map(find_sum, jason))
+        else:
+            return 0    
+```
