@@ -104,3 +104,16 @@
 
         return func(totals)
 ```
+
+## 10 Elves Look, Elves Say
+```python
+    data = list(map(int, puzzle_input))
+```
+
+## 11 Corporate Policy
+```python
+    has_increasing_straight = lambda pw_nums: (
+        any(a == b - 1 == c - 2 for a, b, c in zip(pw_nums, pw_nums[1:], pw_nums[2:]))
+    )
+    has_increasing_straight(list(map(ord, password)))
+```
