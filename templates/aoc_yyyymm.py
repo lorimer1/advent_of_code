@@ -6,7 +6,7 @@ def parse(puzzle_input: str) -> list[str]:
     return data
 
 
-def solve(puzzle_input: str):
+def solve(puzzle_input: str, is_b: bool = False):
     data = parse(puzzle_input)
     pass
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     # if not aoc_util.PUZZLE.answered_a:
     #     aoc_util.PUZZLE.answer_a = part1
 
-    # part2 = solve(input_data)
+    # part2 = solve(input_data, is_b=True)
     # print(f"Part 2: {part2}")
     # if not aoc_util.PUZZLE.answered_b:
     #     aoc_util.PUZZLE.answer_b = part2
