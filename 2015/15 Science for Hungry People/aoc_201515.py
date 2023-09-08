@@ -1,5 +1,4 @@
 import aoc_201515_utilities as aoc_util
-from collections import namedtuple
 
 
 def parse(puzzle_input: str) -> dict:
