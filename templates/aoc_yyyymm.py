@@ -1,25 +1,32 @@
 import aoc_yyyymm_utilities as aoc_util
+from typing import NamedTuple
 
 
-def parse(puzzle_input: str) -> list[str]:
-    data = puzzle_input.splitlines()
-    return data
+class Input(NamedTuple):
+    data: list[str]
 
 
-def solve(puzzle_input: str, is_b: bool = False):
-    data = parse(puzzle_input)
-    pass
+def parse_input(puzzle_input: str) -> Input:
+    return Input(data=puzzle_input.splitlines())
+
+
+@aoc_util.timeit
+def solve_a(puzzle_input: str) -> str:
+    input = parse_input(puzzle_input)
+    return str("")
+
+
+@aoc_util.timeit
+def solve_b(puzzle_input: str) -> str:
+    input = parse_input(puzzle_input)
+    return str("")
 
 
 if __name__ == "__main__":
-    input_data = aoc_util.PUZZLE.input_data
+    answer_a = solve_a(aoc_util.PUZZLE.input_data)
+    print(f"Part a: {answer_a}")
+    # aoc_util.send_answer(part="a", answer=answer_a)
 
-    part1 = solve(input_data)
-    print(f"Part 1: {part1}")
-    # if not aoc_util.PUZZLE.answered_a:
-    #     aoc_util.PUZZLE.answer_a = part1
-
-    # part2 = solve(input_data, is_b=True)
-    # print(f"Part 2: {part2}")
-    # if not aoc_util.PUZZLE.answered_b:
-    #     aoc_util.PUZZLE.answer_b = part2
+    # answer_b = solve_b(aoc_util.PUZZLE.input_data)
+    # print(f"Part b: {answer_b}")
+    # aoc_util.send_answer(part="b", answer=answer_b)

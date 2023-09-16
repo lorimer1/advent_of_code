@@ -36,6 +36,7 @@
 
 ## 06 Probably a Fire Hazard
 ```python
+    from collections import namedtuple
     Statement = namedtuple("Statement", ["action", "start_x", "start_y", "end_x", "end_y"])
     start_x, start_y = map(int, parts[2].split(","))
     statement_obj = Statement(action, start_x, start_y, end_x, end_y)
@@ -156,15 +157,36 @@
 
 ## 15 Science for Hungry People
 ```python
-
+    for sugar in range(100):
+        for sprinkles in range(100 - sugar):
+            for candy in range(100 - sugar - sprinkles):
+                chocolate = 100 - sugar - sprinkles - candy
 ```
 
 ## 16 Aunt Sue
 ```python
-
+    name_part_len = len(line.split(": ")[0])
+    sue_part, rest = line[:name_part_len], line[name_part_len + 2 :]
 ```
 
 ## 17 No Such Thing as Too Much
 ```python
+    from itertools import combinations
+    combos = (com for sub in range(len(data)) for com in combinations(data, sub + 1))
+```
+
+## 18 Like a GIF For Your Yard
+```python 
+    import copy
+    new_grid = copy.deepcopy(grid)
+```
+
+## 19 Medicine for Rudolph
+```python 
+
+```
+
+## 20 Infinite Elves and Infinite Houses
+```python 
 
 ```

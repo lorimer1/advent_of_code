@@ -43,11 +43,9 @@ def print_test_info():
 
 def send_answer(part: str, answer: str):
     answered = getattr(PUZZLE, f"answered_{part}")
+    answer_ = getattr(PUZZLE, f"answer_{part}")
     if not answered:
-        if part == "a":
-            PUZZLE.answer_a = answer
-        else:
-            PUZZLE.answer_b = answer
+        answer_ = answer
 
 
 PUZZLE = aocd.models.Puzzle(year=aoc_year_from_path(), day=aoc_day_from_path())
