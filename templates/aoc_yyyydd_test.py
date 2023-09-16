@@ -1,5 +1,5 @@
 import pytest
-import aoc_yyyymm as aoc
+import templates.aoc_yyyydd as aoc
 
 
 @pytest.mark.parametrize(
