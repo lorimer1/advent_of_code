@@ -182,16 +182,11 @@
 ```
 
 ## 19 Medicine for Rudolph
-```python 
-
-```
 
 ## 20 Infinite Elves and Infinite Houses
-```python 
-
-```
 
 ## 21 RPG Simulator 20XX
-```python 
 
-```
+## 22 Wizard Simulator 20XX
+
+## 23 Opening the Turing Lock
