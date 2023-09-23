@@ -29,3 +29,5 @@ puzzle.input_data
 puzzle.answer_a = 299
 
 
+session token is saved in a file named "token" in:
+C:\Users\roblo\.config\aocd\
