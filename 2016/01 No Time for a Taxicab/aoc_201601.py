@@ -3,21 +3,6 @@ from typing import NamedTuple
 from dataclasses import dataclass
 
 
-@dataclass
-class Location:
-    dir: str
-    N: int
-    E: int
-
-
-DIRECTIONS = {
-    "N": {"N_Step": 1, "E_Step": 0, "R": "E", "L": "W"},
-    "E": {"N_Step": 0, "E_Step": 1, "R": "S", "L": "N"},
-    "S": {"N_Step": -1, "E_Step": 0, "R": "W", "L": "E"},
-    "W": {"N_Step": 0, "E_Step": -1, "R": "N", "L": "S"},
-}
-
-
 class Input(NamedTuple):
     data: list[str]
 
@@ -26,22 +11,32 @@ def parse_input(puzzle_input: str) -> Input:
     return Input(data=puzzle_input.split(", "))
 
 
-def solve(input: Input, is_b: bool = False) -> int:
-    loc = Location(dir="N", N=0, E=0)
-    visited: list[tuple[int, int]] = [(loc.N, loc.E)]
-    passed_twice = False
-    for dir_steps in input.data:
-        lr, steps = dir_steps[0], int(dir_steps[1:])
-        loc.dir = DIRECTIONS[loc.dir][lr]
-        while steps:
-            loc.N += DIRECTIONS[loc.dir]["N_Step"]
-            loc.E += DIRECTIONS[loc.dir]["E_Step"]
-            if is_b and (loc.N, loc.E) in visited:
-                break
-            visited.append((loc.N, loc.E))
-            steps -= 1
+ROTATION = {"L": 1j, "R": -1j}
 
-    return abs(loc.N) + abs(loc.E)
+
+@dataclass
+class Person:
+    dir: complex
+    location: complex
+
+
+def manhattan_dist(location: complex):
+    return int(abs(location.real) + abs(location.imag))
+
+
+def solve(input: Input, is_b: bool = False) -> int:
+    me = Person(location=0 + 0j, dir=1j)
+    visited: list[complex] = [me.location]
+    for instruction in input.data:
+        lr, steps = instruction[0], int(instruction[1:])
+        me.dir *= ROTATION[lr]
+        for _ in range(steps):
+            me.location += me.dir
+            if is_b and me.location in visited:
+                return manhattan_dist(me.location)
+            visited.append(me.location)
+
+    return manhattan_dist(me.location)
 
 
 @aoc_util.timeit
