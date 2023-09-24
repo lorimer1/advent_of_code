@@ -33,10 +33,10 @@ def solve(input: Input, is_b: bool = False) -> int:
         for _ in range(steps):
             me.location += me.dir
             if is_b and me.location in visited:
-                return manhattan_dist(me.location)
+                return manhattan_dist(me.location)  # solve_b
             visited.append(me.location)
 
-    return manhattan_dist(me.location)
+    return manhattan_dist(me.location)  # solve_a
 
 
 @aoc_util.timeit
