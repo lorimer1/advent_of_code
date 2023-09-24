@@ -192,3 +192,10 @@
 ## 23 Opening the Turing Lock
 
 ## 24 It Hangs in the Balance
+```python
+from functools import reduce
+from operator import mul
+qes = [
+    reduce(mul, c) for c in combinations(all_weights, i) if sum(c) == goal_weight
+]
+```

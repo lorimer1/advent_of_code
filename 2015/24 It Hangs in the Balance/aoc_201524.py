@@ -1,51 +1,30 @@
 import aoc_201524_utilities as aoc_util
 from typing import NamedTuple
-from itertools import permutations
+from itertools import combinations
 from functools import reduce
-
-"""
-g1, g2, g3 weigh the same
-smallest g1 possible
-return product of g1 (smallest g1 if multiple smallest g1)
-"""
+from operator import mul
 
 
 class Input(NamedTuple):
     data: list[int]
 
 
-class Solution(NamedTuple):
-    used: int
-    qe: int
-
-
 def parse_input(puzzle_input: str) -> Input:
     return Input(data=sorted(map(int, puzzle_input.splitlines()), reverse=True))
 
 
-def get_max_count(all_weights: list[int], goal_weight: int) -> int:
-    weight = 0
-    for idx, weight in enumerate(reversed(all_weights)):
-        weight += weight
-        if weight >= goal_weight:
-            return idx
-    return len(all_weights)
-
-
+# note that we don't need to check if the remainder evenly split in to the correct group weight
 def solve(all_weights: list[int], no_of_groups: int) -> int:
-    def aux(weights, used_weight, used_count, qe):
-        if used_weight == goal_weight:
-            possible_solutions.add(Solution(used_count, qe))
-        elif used_weight < goal_weight and weights and used_count < max_allowed_count:
-            aux(weights[1:], used_weight, used_count, qe)
-            aux(weights[1:], used_weight + weights[0], used_count + 1, qe * weights[0])
-
-    possible_solutions: set[Solution] = set()
     goal_weight = sum(all_weights) // no_of_groups
-    max_allowed_count = get_max_count(all_weights, goal_weight)
-    aux(all_weights, used_weight=0, used_count=0, qe=1)
-    best_solution = min(possible_solutions)
-    return best_solution.qe
+    for i in range(len(all_weights)):
+        qes = [
+            reduce(mul, c)
+            for c in combinations(all_weights, i)
+            if sum(c) == goal_weight
+        ]
+        if qes:
+            return min(qes)
+    return -1
 
 
 @aoc_util.timeit
