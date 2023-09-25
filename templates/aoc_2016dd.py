@@ -1,4 +1,4 @@
-import templates.aoc_2016dd_utilities as aoc_util
+import aoc_2016dd_utilities as aoc_util
 from typing import NamedTuple
 
 
