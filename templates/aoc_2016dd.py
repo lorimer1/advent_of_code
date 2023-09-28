@@ -1,24 +1,25 @@
 import aoc_2016dd_utilities as aoc_util
-from typing import NamedTuple
+from dataclasses import dataclass
 
 
-class Input(NamedTuple):
+@dataclass
+class Input:
+    puzzle_input: str
     data: list[str]
 
-
-def parse_input(puzzle_input: str) -> Input:
-    return Input(data=puzzle_input.splitlines())
+    def __post_init__(self):
+        self.data = self.puzzle_input.splitlines()
 
 
 @aoc_util.timeit
 def solve_a(puzzle_input: str) -> str:
-    input = parse_input(puzzle_input)
+    input = Input(puzzle_input, [])
     return str("")
 
 
 @aoc_util.timeit
 def solve_b(puzzle_input: str) -> str:
-    input = parse_input(puzzle_input)
+    input = Input(puzzle_input, [])
     return str("")
 
 
