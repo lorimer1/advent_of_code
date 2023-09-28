@@ -1,25 +1,32 @@
 import aoc_2016dd_utilities as aoc_util
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
 class Input:
+    """
+    Provides a useful data structure for the puzzle input.
+        puzzle_input: text from input file
+        data: structured puzzle input
+    """
+
     puzzle_input: str
-    data: list[str]
+    data: list[str] = field(default_factory=list)
 
     def __post_init__(self):
-        self.data = self.puzzle_input.splitlines()
+        """parse the puzzle input"""
+        self.data = [line for line in self.puzzle_input.splitlines()]
 
 
 @aoc_util.timeit
 def solve_a(puzzle_input: str) -> str:
-    input = Input(puzzle_input, [])
+    input = Input(puzzle_input)
     return str("")
 
 
 @aoc_util.timeit
 def solve_b(puzzle_input: str) -> str:
-    input = Input(puzzle_input, [])
+    input = Input(puzzle_input)
     return str("")
 
 
