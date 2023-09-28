@@ -27,9 +27,9 @@ class Input:
 def get_numpad_as_dict(numpad: list[list[str]]) -> dict[complex, str]:
     numpad_dict = dict()
     for r, row in enumerate(numpad):
-        for c, col in enumerate(row):
-            key = complex(real=c, imag=r)
-            numpad_dict[key] = col
+        for c, key_value in enumerate(row):
+            key_location = complex(real=c, imag=r)
+            numpad_dict[key_location] = key_value
     return numpad_dict
 
 
