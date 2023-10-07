@@ -13,7 +13,7 @@ class Input:
 
 
 @aoc_util.timeit
-def solve_b(puzzle_input: str, is_b=False) -> str:
+def solve(puzzle_input: str, is_b=False) -> str:
     input = Input(puzzle_input)
     return str("")
 
