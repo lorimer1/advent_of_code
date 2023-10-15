@@ -76,11 +76,12 @@ class Maze:
 
     WALL: str = "#"  # structure
     OPEN: str = "."  # not a structure
-    DIR: dict[str, complex] = field(default_factory=dict)  # directions: U, D, L, R
+    PATH: str = "O"  # part of path
+    DIR: dict[str, complex] = field(default_factory=dict)  # directions: L, R, U, D
     TURN: dict[str, complex] = field(default_factory=dict)  # turns: L, R
 
     def __post_init__(self):
-        self.MOVE = {"U": -1j, "D": +1j, "L": -1, "R": 1}
+        self.DIR = {"L": -1, "R": 1, "U": -1j, "D": +1j}
         self.TURN = {"L": 1j, "R": -1j}
 
     def manhattan_dist(self):
@@ -117,13 +118,14 @@ class Maze:
                 point = complex(real=c, imag=r)
                 self.grid[point] = point_value
 
-    def get_printable(self):
+    def get_printable(self, path: set[complex] = set()):
         """get a printable version of the grid"""
         result = []
         for row in range(self.max_row_idex() + 1):
             row_str = ""
             for col in range(self.max_col_idex() + 1):
-                val = self.grid[complex(real=col, imag=row)]
+                loc = complex(real=col, imag=row)
+                val = self.PATH if loc in path else self.grid[loc]
                 row_str += val if val else " "
             result.append(row_str)
         return "\n".join(result)
