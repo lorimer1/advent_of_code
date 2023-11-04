@@ -9,13 +9,13 @@ class Input:
 
     def __post_init__(self):
         """parse the puzzle input"""
-        self.data = [line for line in self.puzzle_input.splitlines()]
+        self.data = self.puzzle_input.splitlines()
 
 
 @aoc_util.timeit
 def solve(puzzle_input: str, is_b=False) -> str:
     input = Input(puzzle_input)
-    return str("")
+    raise ValueError("Answer not found")
 
 
 if __name__ == "__main__":
