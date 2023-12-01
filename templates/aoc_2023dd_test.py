@@ -1,5 +1,5 @@
 import pytest
-import aoc_2016dd as aoc
+import aoc_2023dd as aoc
 
 
 @pytest.mark.parametrize(

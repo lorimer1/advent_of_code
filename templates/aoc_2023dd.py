@@ -1,4 +1,4 @@
-import aoc_2016dd_utilities as aoc_util
+import aoc_2023dd_utilities as aoc_util
 from dataclasses import dataclass, field
 
 
